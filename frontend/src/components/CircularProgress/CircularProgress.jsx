@@ -1,4 +1,3 @@
-import React from 'react';
 import { LoaderContainer, Loader } from './CircularProgress.styles.jsx';
 
 export const CircularProgress = props => {
