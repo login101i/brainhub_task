@@ -16,7 +16,7 @@ exports.getEvents = catchAsyncErrors(async (req, res, next) => {
 exports.createEvent = catchAsyncErrors(async (req, res, next) => {
 	const newEvent = await Event.create(req.body);
 	if (!newEvent) {
-		return next(new ErrorHandler('Nie stworzono eventu', 404));
+		return next(new ErrorHandler('Error, event was not created.', 404));
 	}
 	res.status(201).json({
 		success: true,

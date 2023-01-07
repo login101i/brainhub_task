@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const eventModelStrings = require('./EventStrings');
 
 const eventSchema = new mongoose.Schema(
 	{
 		firstName: {
 			type: String,
-			required: [true, 'Proszę wprowadź nazwę eventu'],
-			unique: true,
-			maxlength: [100, 'Proszę wprowadź max 100 znaków w tytule eventu.'],
+			required: [true, eventModelStrings.firstName.maxLengthText],
+			unique: false,
+			maxlength: [100, eventModelStrings.firstName.maxLengthText],
 		},
 		lastName: {
 			type: String,
-			required: [true, 'Proszę wprowadź nazwę eventu'],
-			unique: true,
-			maxlength: [100, 'Proszę wprowadź max 100 znaków w tytule eventu.'],
+			required: [true, eventModelStrings.lastName.requiredText],
+			unique: false,
+			maxlength: [100, eventModelStrings.lastName.maxLengthText],
 		},
 		email: {
 			type: String,
-			required: [true, 'Proszę wpisać adres e-mail'],
+			required: [true, eventModelStrings.email.requiredText],
 			unique: true,
-			validate: [validator.isEmail, 'Proszę podać poprawny adres email'],
+			validate: [validator.isEmail, eventModelStrings.email.validateText],
 		},
 		createdAt: {
 			type: Date,
@@ -28,6 +29,5 @@ const eventSchema = new mongoose.Schema(
 	},
 	{ timestamps: true },
 );
-
 
 module.exports = mongoose.model('Event', eventSchema);
