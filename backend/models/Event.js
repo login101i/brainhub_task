@@ -6,15 +6,17 @@ const eventSchema = new mongoose.Schema(
 	{
 		firstName: {
 			type: String,
-			required: [true, eventModelStrings.firstName.maxLengthText],
+			required: [true, eventModelStrings.firstName.requiredText],
 			unique: false,
 			maxlength: [100, eventModelStrings.firstName.maxLengthText],
+			minlength: [2, eventModelStrings.firstName.minLengthText],
 		},
 		lastName: {
 			type: String,
 			required: [true, eventModelStrings.lastName.requiredText],
 			unique: false,
 			maxlength: [100, eventModelStrings.lastName.maxLengthText],
+			minlength: [2, eventModelStrings.lastName.minLengthText],
 		},
 		email: {
 			type: String,
@@ -22,9 +24,11 @@ const eventSchema = new mongoose.Schema(
 			unique: true,
 			validate: [validator.isEmail, eventModelStrings.email.validateText],
 		},
-		createdAt: {
+
+		eventDate: {
 			type: Date,
-			default: Date.now,
+			required: [true, eventModelStrings.eventDate.requiredText],
+			validate: [validator.isDate, eventModelStrings.eventDate.validateText],
 		},
 	},
 	{ timestamps: true },

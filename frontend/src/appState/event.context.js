@@ -1,13 +1,7 @@
 import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { getEventsFromLocaleStorage } from '../utils/getEventsFromLocaleStorage';
+import { actionTypes } from './eventActionTypes';
 import axios from 'axios';
-
-const actionTypes = {
-  SET_EVENTS: 'SET_EVENTS',
-  NEW_EVENT_REQUEST: 'NEW_EVENT_REQUEST',
-  NEW_EVENT_SUCCESS: 'NEW_EVENT_SUCCESS',
-  CREATE_EVENT_FAIL: 'CREATE_EVENT_FAIL'
-};
 
 const EventReducer = (state, action) => {
   const newEvent = action.payload?.newEvent;
@@ -31,7 +25,8 @@ const EventReducer = (state, action) => {
     case actionTypes.CREATE_EVENT_FAIL:
       return {
         ...state,
-        error: action.payload.error
+        error: action.payload,
+        loading: false
       };
     default:
       return state;

@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+export const required = (val) => ({ valid: !!val && val.length > 1, message: 'Please enter a value with minimum two characters' });
+
 export const emailValidator = (val) => ({
   valid:
     // eslint-disable-next-line no-useless-escape
@@ -5,4 +9,9 @@ export const emailValidator = (val) => ({
       val
     ),
   message: 'Your email has invalid format!'
+});
+
+export const dateValidator = (value) => ({
+  valid: moment(value).isSameOrAfter(new Date(), 'day'),
+  message: 'Please pick today or day after tomorrow'
 });

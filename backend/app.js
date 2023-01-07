@@ -14,8 +14,8 @@ app.use(bodyParser.json({ limit: '5mb' }));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use(errorMiddleware);
 
 app.use('/api/v1', events);
+app.use(errorMiddleware);
 
 module.exports = app;
