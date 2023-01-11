@@ -54,7 +54,7 @@ In the project directory, you can run bolow script to install packages for backe
 
 
 ```sh
- npm install-backend
+ npm run install-backend
 ```
 
 Now install required packages for client side by typing: npm install-frontend. 
