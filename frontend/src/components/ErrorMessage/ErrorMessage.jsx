@@ -1,6 +1,6 @@
 import React from 'react';
 import { ErrorMessageContainer, Error } from './ErrorMessage.styles';
-import { beautifyError } from '../../utils/beautifyError';
+import PropTypes from 'prop-types';
 
 export const ErrorMessage = ({ children }) => {
   return (
@@ -8,4 +8,8 @@ export const ErrorMessage = ({ children }) => {
       <Error>{children}</Error>
     </ErrorMessageContainer>
   );
+};
+
+ErrorMessage.propTypes = {
+  children: PropTypes.node
 };

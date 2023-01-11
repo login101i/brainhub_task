@@ -1,10 +1,21 @@
 {
   "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
   "root": true,
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:react/recommended", "plugin:react/jsx-runtime", "plugin:testing-library/react"],
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module"
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": false, // <== ADD THIS
+    "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
   },
   "rules": {
     "semi": [2, "always"],

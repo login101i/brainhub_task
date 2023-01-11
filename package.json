@@ -1,24 +1,36 @@
 {
-	"name": "brainhub_app",
+	"name": "brainhub_app_backend",
 	"version": "1.0.0",
 	"description": "",
 	"main": "backend/server.js",
 	"dependencies": {
+		"colors": "^1.4.0",
+		"concurrently": "^7.6.0",
 		"cors": "^2.8.5",
-		"express": "^4.18.2"
+		"express": "^4.18.2",
+		"mongodb-memory-server": "^8.11.0"
 	},
 	"devDependencies": {
-		"nodemon": "^2.0.20",
-		"cookie-parser": "^1.4.5",
-		"body-parser": "^1.20.1",
-		"dotenv": "^10.0.0",
-		"mongoose": "^6.0.11",
 		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.20.1",
+		"cookie-parser": "^1.4.5",
+		"dotenv": "^10.0.0",
+		"env-cmd": "^8.0.2",
+		"jest": "^29.3.1",
+		"mongoose": "^6.0.11",
+		"node-mocks-http": "^1.12.1",
+		"nodemon": "^2.0.20",
+		"supertest": "^6.3.3",
 		"validator": "^13.7.0"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon server.js"
+		"install-backend": "npm install",
+		"install-frontend": "npm install --prefix frontend",
+		"server": "nodemon server.js",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"test:unit": "jest __tests__/unit/* --watchAll",
+		"test:integration": "jest --watchAll --detectOpenHandles __tests__/integration/*"
 	},
 	"keywords": [],
 	"license": "ISC",

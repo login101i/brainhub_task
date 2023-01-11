@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
-import { InputWrapper, ScaleLabel, SecondWrapper, ErrorMessage, InfoMessage, Input, DateInput } from './StateInput.styles';
+import { useState } from 'react';
+import { InputWrapper, ScaleLabel, SecondWrapper, ErrorMessage, Input, DateInput } from './StateInput.styles';
+import PropTypes from 'prop-types';
+import { useEventContext } from '../../appState/event.context';
+import { actionTypes } from '../../appState/eventActionTypes';
 
-export const StateInput = ({ label, value, onChange, type, validator, inputProps }) => {
+export const StateInput = ({ label, value, onChange = () => {}, type, validator, inputProps }) => {
   const [isLabelRaised, setLabelRaised] = useState(false);
   const [isErrorMessage, setErrorMessage] = useState(false);
-  const [isInfoMessage, setIsInfoMessage] = useState(false);
+  const { dispatch, error } = useEventContext();
 
   const getMessage = (value) => {
     const payload = validator(value);
@@ -19,22 +22,16 @@ export const StateInput = ({ label, value, onChange, type, validator, inputProps
     onChange(value);
   };
 
-  useEffect(() => {
+  const handleBlur = () => {
+    !value && setLabelRaised(false);
     if (validator && value && !validator(value).valid) {
       getMessage(value);
     } else {
       setErrorMessage(false);
+      dispatch({
+        type: actionTypes.CLEAR_INPUT_ERROR
+      });
     }
-  }, [value]);
-
-  const renderAdditionalMessage = () => {
-    if (isErrorMessage) {
-      return <ErrorMessage>{validator(value).message}</ErrorMessage>;
-    }
-    if (isInfoMessage) {
-      return <InfoMessage>info message</InfoMessage>;
-    }
-    return null;
   };
 
   return (
@@ -44,21 +41,32 @@ export const StateInput = ({ label, value, onChange, type, validator, inputProps
       </ScaleLabel>
       <SecondWrapper isErrorMessage={isErrorMessage}>
         {type === 'date' ? (
-          <DateInput type={type} value={value} onChange={handleChange} {...inputProps} />
+          <DateInput type={type} value={value} onChange={handleChange} onBlur={handleBlur} {...inputProps} data-testid="stateInputDate" />
         ) : (
           <Input
             onFocus={() => {
               setLabelRaised(true);
             }}
-            onBlur={() => !value && setLabelRaised(false)}
+            onBlur={handleBlur}
             type={type}
             value={value}
             onChange={handleChange}
+            data-testid="stateInput"
+            autocomplete="off"
             {...inputProps}
           />
         )}
-        {renderAdditionalMessage()}
+        {isErrorMessage && <ErrorMessage data-testid="errorMessage">{validator(value).message}</ErrorMessage>}
       </SecondWrapper>
     </InputWrapper>
   );
+};
+
+StateInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  type: PropTypes.string,
+  validator: PropTypes.func,
+  inputProps: PropTypes.string
 };

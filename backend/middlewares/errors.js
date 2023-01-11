@@ -13,10 +13,13 @@ module.exports = (error, req, res, next) => {
 			const message = `Duplicated ${Object.keys(error.keyValue)} in event data base. Please type in another ${Object.keys(error.keyValue)}`;
 			error = new ErrorHandler(message, 400);
 		}
+		if (error.code === 'ECONNREFUSED') {
+			const message = `Duplicated ${Object.keys(error.keyValue)} in event data base. Please type in another ${Object.keys(error.keyValue)}`;
+			error = new ErrorHandler(message, 400);
+		}
 
 		res.status(error.statusCode).json({
-			success: false,
-			errMessage: error.message,
+			data: error.message,
 		});
 	}
 };

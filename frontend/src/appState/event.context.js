@@ -1,15 +1,18 @@
-import { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import { createContext, useContext, useEffect, useReducer, useMemo } from 'react';
 import { getEventsFromLocaleStorage } from '../utils/getEventsFromLocaleStorage';
 import { actionTypes } from './eventActionTypes';
+import { utilsStrings } from '../utils/utilsString';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const EventReducer = (state, action) => {
   const newEvent = action.payload?.newEvent;
   switch (action.type) {
-    case actionTypes.SET_EVENTS:
+    case actionTypes.GET_EVENTS:
       return {
         ...state,
-        events: action.payload.eventsList
+        events: action.payload.eventsList,
+        error: false
       };
     case actionTypes.NEW_EVENT_REQUEST:
       return {
@@ -19,14 +22,25 @@ const EventReducer = (state, action) => {
     case actionTypes.NEW_EVENT_SUCCESS:
       return {
         ...state,
-        events: [...state.events, newEvent],
-        loading: false
+        events: [newEvent, ...state.events],
+        loading: false,
+        error: false
       };
     case actionTypes.CREATE_EVENT_FAIL:
       return {
         ...state,
         error: action.payload,
         loading: false
+      };
+    case actionTypes.CLEAR_INPUT_ERROR:
+      return {
+        ...state,
+        error: false
+      };
+    case actionTypes.CONNECTION_ERROR:
+      return {
+        ...state,
+        error: action.payload
       };
     default:
       return state;
@@ -36,7 +50,12 @@ const EventReducer = (state, action) => {
 const EventContext = createContext(getEventsFromLocaleStorage());
 
 export const useEventContext = () => {
-  return useContext(EventContext);
+  const context = useContext(EventContext);
+
+  if (!context) {
+    throw new Error('Events App must be used with an EventContextProvider');
+  }
+  return context;
 };
 
 export const EventContextProvider = ({ children }) => {
@@ -45,8 +64,9 @@ export const EventContextProvider = ({ children }) => {
   const getEvents = async () => {
     try {
       const { data } = await axios.get('http://127.0.0.1:4000/api/v1/events');
-      dispatch({ type: actionTypes.SET_EVENTS, payload: data });
+      dispatch({ type: actionTypes.GET_EVENTS, payload: data });
     } catch (err) {
+      dispatch({ type: actionTypes.CONNECTION_ERROR, payload: utilsStrings.connectionError });
       getEventsFromLocaleStorage();
     }
   };
@@ -56,8 +76,7 @@ export const EventContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (state.events.length) {
-      // eslint-disable-next-line no-undef
+    if (state.events?.length) {
       localStorage.setItem('events', JSON.stringify(state.events));
     }
   }, [state.events]);
@@ -74,4 +93,8 @@ export const EventContextProvider = ({ children }) => {
       {children}
     </EventContext.Provider>
   );
+};
+
+EventContextProvider.propTypes = {
+  children: PropTypes.element.isRequired
 };

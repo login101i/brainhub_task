@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const InputWrapper = styled.div`
   position: relative;
-  width: 400px;
+  width: 360px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,6 +10,10 @@ export const InputWrapper = styled.div`
   min-height: 65px;
   overflow: hidden;
   height: 70px;
+  margin: 2px 0px;
+  @media (max-width: 360px) {
+    width: 300px;
+  }
 `;
 
 export const ScaleLabel = styled.div`
@@ -17,7 +21,7 @@ export const ScaleLabel = styled.div`
   position: absolute;
   top: ${(props) => (props.isLabelRaised ? '-3px' : '25px')};
   left: 10px;
-  color: ${(props) => (props.isErrorMessage ? props.theme.colors.error : props.theme.colors.primary)};
+  color: ${(props) => (props.isErrorMessage ? props.theme.colors.error : 'gray')};
   font-size: 14px;
   transition: all 0.2s;
 `;
