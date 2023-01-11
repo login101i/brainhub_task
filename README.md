@@ -16,7 +16,19 @@ The project was created in React
 
 
 ## File structure
-#### `frontend` - Holds the frontend application.
+
+
+#### `backend` - Holds the server application.
+- #### `__tests__` - This folder holds  test for unit and integration tests .
+- #### `config` - This holds our configuration files, like mongoDB uri and connection with dataBase.
+- #### `controllers` - These hold  callback functions that each route will call.
+- #### `models` - This holds all of our event model.
+- #### `routes` - This holds all of our HTTP to URL path associations for each unique url.
+- #### `utils` - Util functions which distributed on backend.
+- #### `server.js` - Defines connection with server on specific port.
+- #### `app.js` - Defines connection with server on specific port.
+- 
+- #### `frontend` - Holds the frontend application.
 - #### `public` - This holds roof file of a project.
 - #### `src`
     - #### `__tests__` - This folder holds main test for frontend components.
@@ -29,16 +41,6 @@ The project was created in React
     - #### `index.js` - This is what renders the react app by rendering App.js, should not change.
 - #### `package.json` - Defines npm behaviors and packages for the client.
 - #### `....` - configure files for purpose of this project.
-
-#### `backend` - Holds the server application.
-- #### `__tests__` - This folder holds  test for unit and integration tests .
-- #### `config` - This holds our configuration files, like mongoDB uri and connection with dataBase.
-- #### `controllers` - These hold  callback functions that each route will call.
-- #### `models` - This holds all of our event model.
-- #### `routes` - This holds all of our HTTP to URL path associations for each unique url.
-- #### `utils` - Util functions which distributed on backend.
-- #### `server.js` - Defines connection with server on specific port.
-- #### `app.js` - Defines connection with server on specific port.
 
 
 #### `.gitignore` - Tells git which files to ignore.
