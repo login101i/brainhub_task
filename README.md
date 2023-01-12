@@ -75,23 +75,22 @@ npm run dev
 Above script runs both the client app and the server app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
+
+Below script runs only the client app in development mode.
+Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+
 ```sh
 npm run client
 ```
 
-Runs just the client app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+If you want to just run the server in development mode choose:
 
 ```sh
 npm run server
 ```
 
-Runs just the server in development mode.<br>
 
-```sh
-npm run build
-```
-Runs one of those to test unit or integration tests for backend.<br>
+Runs one of these two to test unit or integration tests for backend.
 
 ```sh
 npm run test:unit
@@ -99,6 +98,7 @@ npm run test:unit
 ```sh
 npm run test:integration
 ```
+
 If you want to test client side just go to ../frontend location and run:
 
 ```sh
