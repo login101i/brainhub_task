@@ -51,46 +51,46 @@ The project was created in React
 ## Available Scripts
 
 
-In the project directory, you can run bolow script to install packages for backend:
+In the project directory, you can run below script to install packages for backend:
 
 
 ```sh
- npm run install-backend
+ npm install
 ```
 
-Now install required packages for client side by typing: npm install-frontend. 
+Now install required packages for client side by running the same script but go to frontend location. 
 Run this command from the same location.
 
-```sh
-npm run install-frontend
-```
 
-
-Here you go!
+Here you go! Go to project directory and run:
 
 ```sh
 npm run dev
 ```
 
-Above script runs both the client app and the server app in development mode.
+Above script runs both  the client and the server at the same time in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
-
-Below script runs only the client app in development mode.
-Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+If this process to open project with this method seems too long for you try run client and server separately by choosing :
 
 ```sh
 npm run client
 ```
 
-If you want to just run the server in development mode choose:
+Runs just the client app in development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
 ```sh
 npm run server
 ```
 
+Runs just the server in development mode.<br>
 
-Runs one of these two to test unit or integration tests for backend.
+
+```sh
+npm run build
+```
+Runs one of those to test unit or integration tests for backend.<br>
 
 ```sh
 npm run test:unit
@@ -98,7 +98,6 @@ npm run test:unit
 ```sh
 npm run test:integration
 ```
-
 If you want to test client side just go to ../frontend location and run:
 
 ```sh
