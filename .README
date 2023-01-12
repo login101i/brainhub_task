@@ -16,6 +16,18 @@ The project was created in React
 
 
 ## File structure
+
+
+#### `backend` - Holds the server application.
+- #### `__tests__` - This folder holds  test for unit and integration tests .
+- #### `config` - This holds our configuration files, like mongoDB uri and connection with dataBase.
+- #### `controllers` - These hold  callback functions that each route will call.
+- #### `models` - This holds all of our event model.
+- #### `routes` - This holds all of our HTTP to URL path associations for each unique url.
+- #### `utils` - Util functions which distributed on backend.
+- #### `server.js` - Defines connection with server on specific port.
+- #### `app.js` - Defines connection with server on specific port.
+
 #### `frontend` - Holds the frontend application.
 - #### `public` - This holds roof file of a project.
 - #### `src`
@@ -28,18 +40,7 @@ The project was created in React
     - #### `App.js` - This is what renders all of our browser routes and different views.
     - #### `index.js` - This is what renders the react app by rendering App.js, should not change.
 - #### `package.json` - Defines npm behaviors and packages for the client.
-- #### `....` - configure files for purpose of this project.
-
-#### `backend` - Holds the server application.
-- #### `__tests__` - This folder holds  test for unit and integration tests .
-- #### `config` - This holds our configuration files, like mongoDB uri and connection with dataBase.
-- #### `controllers` - These hold  callback functions that each route will call.
-- #### `models` - This holds all of our event model.
-- #### `routes` - This holds all of our HTTP to URL path associations for each unique url.
-- #### `utils` - Util functions which distributed on backend.
-- #### `server.js` - Defines connection with server on specific port.
-- #### `app.js` - Defines connection with server on specific port.
-
+- #### `....` - Configure files for purpose of this project.
 
 #### `.gitignore` - Tells git which files to ignore.
 #### `README` - This file!
@@ -50,29 +51,26 @@ The project was created in React
 ## Available Scripts
 
 
-In the project directory, you can run bolow script to install packages for backend:
+In the project directory, you can run below script to install packages for backend:
 
 
 ```sh
- npm install-backend
+ npm install
 ```
 
-Now install required packages for client side by typing: npm install-frontend. 
-Run this command from the same location.
-
-```sh
-npm run install-frontend
-```
+Now install required packages for client side by running the same script but run this command in frontend location. 
 
 
-Here you go!
+Here you go! Go to project directory and run:
 
 ```sh
 npm run dev
 ```
 
-Above script runs both the client app and the server app in development mode.
+Above script runs both  the client and the server at the same time in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+
+If this process to open project with this method seems too long for you try run client and server separately by choosing :
 
 ```sh
 npm run client
@@ -86,6 +84,7 @@ npm run server
 ```
 
 Runs just the server in development mode.<br>
+
 
 ```sh
 npm run build
