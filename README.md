@@ -58,17 +58,16 @@ In the project directory, you can run below script to install packages for backe
  npm install
 ```
 
-Now install required packages for client side by running the same script but go to frontend location. 
-Run this command from the same location.
+Switch to frontend location and install required packages for client side by running the same script. 
 
 
-Here you go! Go to project directory and run:
+Here you go! Go to project directory and run below script:
 
 ```sh
 npm run dev
 ```
 
-Above script runs both  the client and the server at the same time in development mode.
+It runs both the client and the server at the same time in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
 
 If this process to open project with this method seems too long for you try run client and server separately by choosing :
