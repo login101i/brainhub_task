@@ -36,7 +36,7 @@ export const StateInput = ({ label, value, onChange = () => {}, type, validator,
 
   return (
     <InputWrapper type={type}>
-      <ScaleLabel isLabelRaised={isLabelRaised} isErrorMessage={isErrorMessage}>
+      <ScaleLabel isLabelRaised={isLabelRaised} isErrorMessage={isErrorMessage} htmlFor={type}>
         {label}
       </ScaleLabel>
       <SecondWrapper isErrorMessage={isErrorMessage}>
@@ -51,8 +51,10 @@ export const StateInput = ({ label, value, onChange = () => {}, type, validator,
             type={type}
             value={value}
             onChange={handleChange}
-            data-testid="stateInput"
+            data-testid={label}
             autocomplete="off"
+            id={label}
+            name={label}
             {...inputProps}
           />
         )}

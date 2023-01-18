@@ -6,12 +6,12 @@ const cors = require('cors');
 const errorMiddleware = require('./middlewares/errors');
 const events = require('./routes/events');
 
-dotenv.config({ path: 'backend/config/config.env' });
+dotenv.config({ path: 'config/config.env' });
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 app.use(express.json());
 
 // route for integration test

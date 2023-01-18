@@ -2,7 +2,7 @@
 	"name": "brainhub_app_backend",
 	"version": "1.0.0",
 	"description": "",
-	"main": "backend/server.js",
+	"main": "server.js",
 	"dependencies": {
 		"colors": "^1.4.0",
 		"concurrently": "^7.6.0",
@@ -24,7 +24,7 @@
 		"validator": "^13.7.0"
 	},
 	"scripts": {
-		"server": "nodemon server.js",
+		"server": "nodemon -L server.js",
 		"client": "npm start --prefix frontend",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"test:unit": "jest __tests__/unit/* --watchAll",

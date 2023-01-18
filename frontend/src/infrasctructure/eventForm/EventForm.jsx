@@ -10,18 +10,12 @@ import { FormEventContainer } from './EventForm.styles';
 
 export const EventForm = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', eventDate: formatDate() });
-  const { events, error, dispatch, loading } = useEventContext();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const { error, dispatch, loading } = useEventContext();
 
   const handleForm = (name) => (value) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-  const customInputsNumber = 4;
-  const allInputsFilled = Object.values(formData).filter((el) => el !== '').length === customInputsNumber;
-
-  useEffect(() => {
-    setIsButtonDisabled(allInputsFilled ? false : true);
-  }, [allInputsFilled]);
 
   const handleSave = async () => {
     try {
@@ -48,9 +42,9 @@ export const EventForm = () => {
         validator={required}
       />
       <StateInput stateless value={formData.eventDate} type="date" onChange={handleForm('eventDate')} validator={dateValidator} />
-      <StateInput label="Your Email" value={formData.email} onChange={handleForm('email')} validator={emailValidator} />
+      <StateInput label="Your Email" value={formData.email} onChange={handleForm('email')} validator={emailValidator} type="email"/>
 
-      {loading ? <CircularProgress /> : <CustomButton onClick={handleSave} label="Save" disabled={isButtonDisabled} />}
+      {loading ? <CircularProgress /> : <CustomButton onClick={handleSave} label="Save" />}
       {error && <ErrorMessage>{beautifyError(error)}</ErrorMessage>}
     </FormEventContainer>
   );

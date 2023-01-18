@@ -16,7 +16,7 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const ScaleLabel = styled.div`
+export const ScaleLabel = styled.label`
   pointer-events: none;
   position: absolute;
   top: ${(props) => (props.isLabelRaised ? '-3px' : '25px')};

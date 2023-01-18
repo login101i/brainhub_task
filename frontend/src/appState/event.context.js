@@ -47,7 +47,7 @@ const EventReducer = (state, action) => {
   }
 };
 
-const EventContext = createContext(getEventsFromLocaleStorage());
+ export const EventContext = createContext(getEventsFromLocaleStorage());
 
 export const useEventContext = () => {
   const context = useContext(EventContext);

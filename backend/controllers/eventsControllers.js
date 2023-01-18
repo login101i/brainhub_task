@@ -31,24 +31,35 @@ exports.getEventById = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.createEvent = catchAsyncErrors(async (req, res, next) => {
-	const { firstName, lastName, email, eventDate } = req.body;
-	if (!firstName || !lastName || !email || !eventDate) {
-		return res.status(404).json('Error, missing input value.');
-	}
-	if (new Date(eventDate) < new Date(getCurrentDate())) {
-		return res.status(400).json('Do you see that read color above?');
-	}
-	const emailExist = await Event.findOne({ email: req.body.email });
-	if (emailExist) {
-		return res.status(400).json('Email you provided for event is already taken');
-	}
-	const newEvent = await Event.create(req.body);
+	try {
+		const { firstName, lastName, email, eventDate } = req.body;
+		const emptyValues = Object.keys(req.body).filter(key => req.body[key] === '');
 
-	if (!newEvent) {
-		return res.status(400).json('Event was not created');
-	}
+		if (!firstName || !lastName || !email || !eventDate) {
+			return res.status(400).json(`Error, missing ${emptyValues.map(value => value)}.`);
+		}
+		const emptyInputName = firstName.length < 2 && 'first name';
+		const emptySecondName = lastName.length < 2 && 'last name';
+		if (firstName.length < 2 || lastName.length < 2) {
+			return res.status(400).json(`Wpisz więcej niż jeden znak w pole ${emptyInputName}, ${emptySecondName} `);
+		}
+		if (new Date(eventDate) < new Date(getCurrentDate())) {
+			return res.status(400).json('Please pick today or day after tomorrow');
+		}
+		const emailExist = await Event.findOne({ email: req.body.email });
+		if (emailExist) {
+			return res.status(400).json('Email you provided for event is already taken');
+		}
+		const newEvent = await Event.create(req.body);
 
-	res.status(201).json({
-		newEvent,
-	});
+		if (!newEvent) {
+			return res.status(400).json('Event was not created');
+		}
+
+		res.status(201).json({
+			newEvent,
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
